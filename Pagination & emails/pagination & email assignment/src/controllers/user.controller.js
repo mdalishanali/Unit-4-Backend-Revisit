@@ -37,6 +37,8 @@ router.post("", async (req, res) => {
 });
 
 router.get("", async (req, res) => {
+  //http://localhost:2345/users?page=1&size=15
+
   try {
     const page = req.query.page || 1;
     const size = req.query.size || 15;
