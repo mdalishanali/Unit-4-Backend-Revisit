@@ -37,7 +37,17 @@ router.post("", async (req, res) => {
 });
 
 router.get("", async (req, res) => {
-  const user = await User.find({}).lean().exec();
-  return res.send(user);
+  try {
+    const page = req.query.page || 1;
+    const size = req.query.size || 15;
+    const users = await User.find()
+      .skip((page - 1) * size)
+      .limit(size)
+      .lean.exec();
+
+    const totalPages = Math.ceil((await User.find().countDocuments()) / size);
+  } catch (err) {
+    return res.status(500).send({ message: err.message });
+  }
 });
 module.exports = router;

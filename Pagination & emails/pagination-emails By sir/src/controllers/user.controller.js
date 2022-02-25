@@ -89,8 +89,9 @@ router.get("/:gender", async (req, res) => {
     // if page = 2 then return 16-30 results
 
     // page = 1 then (page - 1) = 0 then skip 0 items limit (size) // 1 - 15 items
-    // page = 2  then skip ( (page - 1) * size ) = 15 items and limit (size) // 16-30 items
-
+    // page = 2  then skip ( (page - 1) * size ) = 15 items and limit (size) // 16-30 items 
+//it mmeans Male will return all the items 
+    //most important 
     const query = { gender: req.params.gender };
     const users = await User.find(query) // 30 documents
       .skip((page - 1) * size) // page 1 first 15 documents
